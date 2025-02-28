@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURPRISE FOR U!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #d0e7ff; /* Baby blue */
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+            transition: opacity 1s ease, transform 1s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #357ab7;
+        }
+        /* Message Form Styles */
+        .message {
+            background: white;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .message h2 {
+            margin-bottom: 15px;
+            color: #4a90e2;
+        }
+        .message textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            resize: none;
+        }
+        .message button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #4a90e2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .message button:hover {
+            background-color: #357ab7;
+        }
+        /* Footer Styles */
+        footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        /* Card Styles */
+        .card {
+            padding: 20px;
+            background: #ffffff;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            font-size: 1.8rem;
+            color: #4a90e2;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #333;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Backsound Audio -->
+    <audio id="backsound" loop>
+        <source src="Paul Partohap - VITAMIN U (Lyric Video).mp3" type="audio/mpeg">
+    <source src="Paul Partohap - VITAMIN U (Lyric Video) copy.ogg" type="audio/ogg">
+    <source src="Paul Partohap - VITAMIN U (Lyric Video) copy 1.wav" type="audio/wav">
+
+        
+    </audio>
+
+    <!-- Start Button Section -->
+    <div class="section visible" id="start">
+        <button onclick="startExperience()">ayo kita mulai🎉</button>
+    </div>
+
+    <!-- Game Section -->
+    <div class="section" id="game">
+        <h1>Hey Click tombol  🖐️💖 5x, sambil ucapin "i love mipa 5" 5x juga, secara bersamaan, baru boleh lanjut </h1>
+       
+        <button onclick="incrementLove()">🖐️💖</button>
+        <p id="clickCounter">Clicks: 0</p>
+    </div>
+
+    <!-- Header Section -->
+    <div class="section" id="header">
+        <h1>AKHIRNYA PROSES SHOOTING KITA SELESAI! 🎉</h1>
+        <p>Hope u enjoy this little surprise 💖</p>
+        <button onclick="nextSection('header', 'card')">Next</button>
+    </div>
+
+    <!-- Greeting Card Section -->
+    <div class="section" id="card">
+        <div class="card">
+            <h2>Dear Vanessa,</h2>
+            <p>hey, wahai manusia yang selalu punya banyak solusi, jujur ya kalau gaada koe mungkin ni film bakalan bikin sa lebih pusing lagi, </p>
+            <p>ko tuh kayak penyelamat diam-diam, yang selalu ada pas keadaan udah mulai chaos. Entah itu soal naskah, jadwal, atau hal-hal yang tiba-tiba muncul tanpa aba-aba, pasti ko yang pertama kasih solusi. Kadang sa heran, gimana bisa otak kok jalan terus tanpa macet? </p>
+          <p> Terus terang, kerja bareng ko tuh bikin nyaman. Ko selalu bisa jaga suasana tetap profesional tapi tetep asik. Walaupun kadang kita beda pendapat, ujung-ujungnya tetep nemuin jalan tengah yang terbaik buat film ini. Itu yang sa salut dari ko, bisa tegas tapi ga ngebuat orang lain merasa ditekan.</p>
+          <P>Pokoknya, big respect buat Vanessa. Makasih udah jadi sutradara yang bukan cuma mikirin filmnya, tapi juga orang-orang di balik layar.</P>
+        
+        </div>
+        <button onclick="nextSection('card', 'message')">Next</button>
+    </div>
+
+    <!-- Message Form Section -->
+    <div class="section" id="message">
+        <div class="message">
+            <h2>tinggalin satu pesan apa aja buat si Fazila!</h2>
+            <form id="messageForm" action="https://formspree.io/f/mbldzrkk" method="POST">
+                <textarea name="message" placeholder="Write ur msg here...(kalau ketiknya pendek awas aja ni buat webnya penuh effort)" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+   
+    <script>
+        let loveClicks = 0;
+
+        function startExperience() {
+            const audio = document.getElementById('backsound');
+            audio.play().catch(() => {
+                document.addEventListener('click', () => audio.play());
+            });
+            nextSection('start', 'game');
+        }
+
+        function incrementLove() {
+            loveClicks++;
+            document.getElementById('clickCounter').innerText = `Clicks: ${loveClicks}`;
+
+            if (loveClicks === 5) {
+                alert('U did it! Let\'s continue 🎉');
+                triggerConfetti();
+                nextSection('game', 'header');
+            }
+        }
+
+        function nextSection(currentId, nextId) {
+            const currentSection = document.getElementById(currentId);
+            const nextSection = document.getElementById(nextId);
+
+            currentSection.classList.remove('visible');
+            setTimeout(() => {
+                currentSection.style.display = 'none';
+                nextSection.style.display = 'block';
+                setTimeout(() => {
+                    nextSection.classList.add('visible');
+                }, 50);
+            }, 1000); // Animation delay
+        }
+
+        // Confetti animation
+        function triggerConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Handle message form submission
+        const messageForm = document.getElementById('messageForm');
+        messageForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(messageForm);
+            fetch(messageForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('Message sent!');
+                    nextSection('message', 'telegram');
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
